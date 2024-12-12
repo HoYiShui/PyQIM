@@ -1,0 +1,10 @@
+name: stego
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - numpy
+  - opencv
+  - scikit-image
+  - matplotlib
+  - scipy
