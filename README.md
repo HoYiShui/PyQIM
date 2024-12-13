@@ -35,8 +35,8 @@ python -m examples.TestQIM
 
 ```python
 import cv2
-from PyQIM.src.QIMHide import QIMHide
-from PyQIM.utils.Plot import plot_images
+from qim.QIMHide import QIMHide
+from qim.utils.Plot import plot_images
 
 # Load images
 carrier_path = 'path/to/carrier_image.bmp'
@@ -57,9 +57,9 @@ plot_images(imgs)
 ### Extracting a Watermark
 
 ```python
-from PyQIM.src.QIMDehide import QIMDehide
-from PyQIM.utils.Similar import Similar
-from PyQIM.utils.Plot import plot_images
+from qim.QIMDehide import QIMDehide
+from qim.utils.Similar import Similar
+from qim.utils.Plot import plot_images
 
 # Extract watermark
 msg = QIMDehide(stg, delta, len(data))
