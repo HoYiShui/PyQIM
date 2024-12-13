@@ -47,7 +47,7 @@ plot_images(imgs)
 # Extracting Watermark with Noise
 dB = 35
 noise_std = np.sqrt(10 ** (-dB / 10))
-y = I + np.random.normal(0, noise_std, I.shape)
+y = stg + np.random.normal(0, noise_std, stg.shape)
 transparency_noise = psnr(stg, y, data_range=stg.max() - stg.min())
 
 imgs = {
