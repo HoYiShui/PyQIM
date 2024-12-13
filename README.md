@@ -23,9 +23,10 @@ To activate the environment, use:
 conda activate stego
 ```
 
-To see the embedding and extraction process, run the `TESTQIM.py` script **in a higher directory in *PyQIM***:
+To see the embedding and extraction process, run the `TESTQIM.py` script:
 ```bash
-python -m PyQIM.examples.TestQIM
+cd PyQIM
+python -m examples.TestQIM
 ```
 
 ## Usage
