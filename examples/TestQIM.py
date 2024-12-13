@@ -16,9 +16,6 @@ data_dir = os.path.abspath(os.path.join(base_dir, '../qim/data'))
 carrier_path = os.path.join(data_dir, 'lena_512.bmp')
 watermark_path = os.path.join(data_dir, 'logo_64.bmp')
 
-print(f'carrier_path: {carrier_path}')
-print(f'watermark_path: {watermark_path}')
-
 # Initialization and Image Loading
 I = cv2.imread(carrier_path, cv2.IMREAD_GRAYSCALE) # carrier_img
 d = cv2.imread(watermark_path, cv2.IMREAD_GRAYSCALE)  # watermark_img
