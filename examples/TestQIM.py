@@ -3,6 +3,7 @@ import os
 import cv2
 import numpy as np
 from skimage.metrics import peak_signal_noise_ratio as psnr
+from skimage.util import random_noise
 
 from qim.QIMHide import QIMHide
 from qim.QIMDehide import QIMDehide
@@ -46,8 +47,10 @@ plot_images(imgs)
 
 # Extracting Watermark with Noise
 dB = 35
+# noise_std = np.sqrt(10 ** (-dB / 10))
+# y = stg + np.random.normal(0, noise_std, stg.shape)
 noise_std = np.sqrt(10 ** (-dB / 10))
-y = stg + np.random.normal(0, noise_std, stg.shape)
+y = random_noise(stg, mode='gaussian', var=noise_std)
 transparency_noise = psnr(stg, y, data_range=stg.max() - stg.min())
 
 imgs = {
