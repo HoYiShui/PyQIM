@@ -4,14 +4,20 @@ import cv2
 import numpy as np
 from skimage.metrics import peak_signal_noise_ratio as psnr
 
-from PyQIM.src.QIMHide import QIMHide
-from PyQIM.src.QIMDehide import QIMDehide
-from PyQIM.utils.Similar import Similar
-from PyQIM.utils.Plot import plot_images
+from qim.QIMHide import QIMHide
+from qim.QIMDehide import QIMDehide
+from qim.utils.Similar import Similar
+from qim.utils.Plot import plot_images
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-carrier_path = os.path.abspath(os.path.join(base_dir, '../data/lena_512.bmp'))
-watermark_path = os.path.abspath(os.path.join(base_dir, '../data/logo_64.bmp'))
+
+data_dir = os.path.abspath(os.path.join(base_dir, '../qim/data'))
+
+carrier_path = os.path.join(data_dir, 'lena_512.bmp')
+watermark_path = os.path.join(data_dir, 'logo_64.bmp')
+
+print(f'carrier_path: {carrier_path}')
+print(f'watermark_path: {watermark_path}')
 
 # Initialization and Image Loading
 I = cv2.imread(carrier_path, cv2.IMREAD_GRAYSCALE) # carrier_img
