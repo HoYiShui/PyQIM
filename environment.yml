@@ -3,7 +3,9 @@ channels:
   - defaults
   - conda-forge
 dependencies:
+  - tqdm
   - numpy
+  - pands
   - opencv
   - scikit-image
   - matplotlib
