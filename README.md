@@ -1,5 +1,10 @@
 # PyQIM
 
+
+| ![Vanilla QIM with Different Quantificate Step Size](./metrics_plot.png) |![Adaptive QIM with Different Noise Level](./metrics_plot_adaptive_noiseVary.png) |
+|:-----------------------------------------------:|:-----------------------------------------------:|
+| Vanilla QIM with Different Quantificate Step Size | Adaptive QIM with Different Noise Level |
+
 PyQIM is a Python library for Quantization Index Modulation (QIM) based watermarking. It provides functionalities to embed and extract watermarks in grayscale images using Discrete Cosine Transform (DCT).
 
 ## Features
