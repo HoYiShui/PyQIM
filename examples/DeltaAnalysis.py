@@ -31,7 +31,7 @@ def plot_metrics(metrics_dict, output_dir=None):
     # 保存图像到本地
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
-        output_path = os.path.join(output_dir, "metrics_plot.png")
+        output_path = os.path.join(output_dir, "metrics_plot_vanilla_deltaVary.png")
         plt.savefig(output_path)
         print(f"图像已保存至: {output_path}")
     
@@ -73,7 +73,7 @@ def analyze_deltas_and_save(delta_values, noise_dB, output_dir=None):
     # 保存数据为 CSV 文件
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
-        csv_path = os.path.join(output_dir, "metrics_results.csv")
+        csv_path = os.path.join(output_dir, "metrics_results_vanilla_deltaVary.csv")
         results_df.to_csv(csv_path, index=False)
         print(f"数据已保存至: {csv_path}")
 
