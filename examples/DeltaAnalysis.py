@@ -7,12 +7,12 @@ from .DeltaAnalysis_sample import watermark_analysis_sample
 
 def plot_metrics(metrics_dict, output_dir=None):
     """
-    绘制不同指标随 delta 的变化，使用不同颜色的折线图，并可选择保存图像。
+    Plot the changes of different metrics with delta using line charts of different colors, and optionally save the images.
     
     Parameters:
         @param metrics_dict (dict): 
-            包含多组数据的字典，键为指标名 (str)，值为包含 (delta_values, metric_values) 的 tuple。
-        @param output_dir (str): 可选，保存图像的文件夹路径。如果为 None，则不保存。
+            Dictionary containing multiple sets of data, where the key is the metric name (str) and the value is a tuple containing (delta_values, metric_values).
+        @param output_dir (str): Optional, the folder path to save the images. If None, the images will not be saved.
     """
     colors = ['b', 'g', 'r', 'm']
     plt.figure(figsize=(12, 8))
@@ -28,32 +28,32 @@ def plot_metrics(metrics_dict, output_dir=None):
 
     plt.tight_layout()
 
-    # 保存图像到本地
+    # Save the image locally
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
         output_path = os.path.join(output_dir, "metrics_plot_vanilla_deltaVary.png")
         plt.savefig(output_path)
-        print(f"图像已保存至: {output_path}")
+        print(f"Image saved to: {output_path}")
     
     plt.show()
 
 
 def analyze_deltas_and_save(delta_values, noise_dB, output_dir=None):
     """
-    分析 delta 的变化对多个指标的影响，并保存数据与绘图结果。
+    Analyze the impact of delta changes on multiple metrics and save the data and plot results.
     
     Parameters:
-        @param delta_values (numpy.ndarray): delta 的取值范围。
-        @param noise_dB (float): 噪声强度。
-        @param output_dir (str): 可选，保存结果的文件夹路径。如果为 None，则不保存。
+        @param delta_values (numpy.ndarray): The range of delta values.
+        @param noise_dB (float): Noise intensity.
+        @param output_dir (str): Optional, the folder path to save the results. If None, the results will not be saved.
     """
-    # 初始化存储结果的列表
+    # Initialize lists to store results
     transparency_values = []
     corr_no_noise_values = []
     corr_with_noise_values = []
     similarity_with_noise_values = []
 
-    # 遍历 delta_values，调用 watermark_analysis 函数
+    # Iterate over delta_values and call the watermark_analysis function
     for delta in tqdm(delta_values, desc="Processing deltas", unit="step"):
         results = watermark_analysis_sample(delta, noise_dB)
         transparency_values.append(results[0])
@@ -61,7 +61,7 @@ def analyze_deltas_and_save(delta_values, noise_dB, output_dir=None):
         corr_with_noise_values.append(results[2])
         similarity_with_noise_values.append(results[3])
 
-    # 保存数据到 DataFrame
+    # Save data to DataFrame
     results_df = pd.DataFrame({
         'Delta': delta_values,
         'PSNR': transparency_values,
@@ -70,14 +70,14 @@ def analyze_deltas_and_save(delta_values, noise_dB, output_dir=None):
         'Similarity (With Noise)': similarity_with_noise_values
     })
 
-    # 保存数据为 CSV 文件
+    # Save data as CSV file
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
         csv_path = os.path.join(output_dir, "metrics_results_vanilla_deltaVary.csv")
         results_df.to_csv(csv_path, index=False)
-        print(f"数据已保存至: {csv_path}")
+        print(f"Data saved to: {csv_path}")
 
-    # 准备绘图数据
+    # Prepare data for plotting
     metrics_dict = {
         'PSNR': (delta_values, transparency_values),
         'Correlation (No Noise)': (delta_values, corr_no_noise_values),
@@ -85,7 +85,7 @@ def analyze_deltas_and_save(delta_values, noise_dB, output_dir=None):
         'Similarity (With Noise)': (delta_values, similarity_with_noise_values)
     }
 
-    # 绘制图形并保存
+    # Plot and save the figures
     plot_metrics(metrics_dict, output_dir)
 
 
