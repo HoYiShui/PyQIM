@@ -1,7 +1,7 @@
 # PyQIM
 
 
-| ![Vanilla QIM with Different Quantificate Step Size](./metrics_plot.png) |![Adaptive QIM with Different Noise Level](./metrics_plot_adaptive_noiseVary.png) |
+| ![Vanilla QIM with Different Quantificate Step Size](./examples/output/metrics_plot_vanilla_deltaVary.png) |![Adaptive QIM with Different Noise Level](./examples/output/metrics_plot_adaptive_noiseVary.png) |
 |:-----------------------------------------------:|:-----------------------------------------------:|
 | Vanilla QIM with Different Quantificate Step Size | Adaptive QIM with Different Noise Level |
 
