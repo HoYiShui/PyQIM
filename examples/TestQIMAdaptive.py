@@ -39,7 +39,7 @@ s = Similar(d, m)
 imgs = {
     "watermark": d,
     f'{s:.2f}': m,
-    'differ': np.bitwise_xor(d, m)
+    'differ': np.logical_xor(d, m)
 }
 plot_images(imgs)
 
@@ -63,6 +63,6 @@ sn = Similar(d, m)
 imgs = {
     'watermark': d,
     f'{sn:.2f}': m,
-    'differ': np.bitwise_xor(d, m)
+    'differ': np.logical_xor(d, m)
 }
 plot_images(imgs)
