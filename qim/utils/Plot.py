@@ -2,11 +2,12 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_images(images_dict):
+def plot_images(images_dict, output_path=None):
     """ General plotting function for displaying multiple images.
 
     Parameter:
         @param images_dict (dict): A dictionary where the keys are the titles of the images (str) and the values are the image arrays (numpy.ndarray).
+        @param output_path (str): Optional, the file name (includes relative folder path) to save the images. If None, the images will not be saved.
     
     Usage example:
         images_to_plot = {
@@ -14,19 +15,27 @@ def plot_images(images_dict):
             title2 : image2,
             ...
         }
-        plot_images(images_to_plot)
+        plot_images(images_to_plot,  output_path='/path/to/save/plot_images.png')
 
     """
     num_images = len(images_dict)
-    plt.figure(figsize=(3 * num_images, 3))
+    num_cols = min(2, num_images)
+    num_rows = (num_images + num_cols - 1) // num_cols
+    plt.figure(figsize=(3 * num_cols, 3 * num_rows))
     
     for i, (title, image) in enumerate(images_dict.items(), start=1):
-        plt.subplot(1, num_images, i)
+        plt.subplot(num_rows, num_cols, i)
         plt.imshow(image, cmap='gray')
         plt.title(title)
         plt.axis('off')
     
     plt.tight_layout()
+
+    if output_path:
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        plt.savefig(output_path)
+        print(f"Image saved to: {output_path}")
+
     plt.show()
 
 def plot_metrics(x_label, metrics_dict, output_path=None):
@@ -43,7 +52,8 @@ def plot_metrics(x_label, metrics_dict, output_path=None):
             'Accuracy': ([0.1, 0.2, 0.3], [0.8, 0.85, 0.9]),
             'Loss': ([0.1, 0.2, 0.3], [0.4, 0.35, 0.3])
         }
-        plot_metrics(metrics_dict, output_dir='/path/to/save/metrics_plot.png')
+        plot_metrics('Batch Size', metrics_dict, output_path='/path/to/save/plot_metrics.png')
+    
     """
     colors = ['b', 'g', 'r', 'm']
 
@@ -70,25 +80,24 @@ def plot_metrics(x_label, metrics_dict, output_path=None):
     
     plt.show()
 
+# Test case for plot_images
+def test_plot_images():
+    images_to_plot = {
+        'Image 1': np.random.rand(10, 10),
+        'Image 2': np.random.rand(10, 10),
+    }
+    plot_images(images_to_plot, './test_plot_images.png')
+    print("plot_images test passed.")
+
+# Test case for plot_metrics
+def test_plot_metrics():
+    metrics_dict = {
+        'Accuracy': ([0.1, 0.2, 0.3], [0.8, 0.85, 0.9]),
+        'Loss': ([0.1, 0.2, 0.3], [0.4, 0.35, 0.3])
+    }
+    plot_metrics('Epoch', metrics_dict, './test_plot_metrics.png')
+    print("plot_metrics test passed.")
+
 if __name__ == '__main__':
-    # Test case for plot_images
-    def test_plot_images():
-        images_to_plot = {
-            'Image 1': np.random.rand(10, 10),
-            'Image 2': np.random.rand(10, 10),
-        }
-        plot_images(images_to_plot)
-        print("plot_images test passed.")
-
-    # Test case for plot_metrics
-    def test_plot_metrics():
-        metrics_dict = {
-            'Accuracy': ([0.1, 0.2, 0.3], [0.8, 0.85, 0.9]),
-            'Loss': ([0.1, 0.2, 0.3], [0.4, 0.35, 0.3])
-        }
-        plot_metrics('Epoch', metrics_dict, './test_plot_metrics.png')
-        print("plot_metrics test passed.")
-
-    # Run tests
     test_plot_images()
     test_plot_metrics()
